@@ -113,13 +113,13 @@ for i in range(vBlocksForC):
         crq[i * windowSize: i * windowSize + windowSize, j * windowSize: j * windowSize + windowSize] = np.ceil(
             crDct[i * windowSize: i * windowSize + windowSize, j * windowSize: j * windowSize + windowSize] / QTC)
         crZigzag[i * j] += zigzag(
-            yq[i * windowSize: i * windowSize + windowSize, j * windowSize: j * windowSize + windowSize])
+            crq[i * windowSize: i * windowSize + windowSize, j * windowSize: j * windowSize + windowSize])
         cbDct[i * windowSize: i * windowSize + windowSize, j * windowSize: j * windowSize + windowSize] = cv2.dct(
             cbPadded[i * windowSize: i * windowSize + windowSize, j * windowSize: j * windowSize + windowSize])
         cbq[i * windowSize: i * windowSize + windowSize, j * windowSize: j * windowSize + windowSize] = np.ceil(
             cbDct[i * windowSize: i * windowSize + windowSize, j * windowSize: j * windowSize + windowSize] / QTC)
         cbZigzag[i * j] += zigzag(
-            yq[i * windowSize: i * windowSize + windowSize, j * windowSize: j * windowSize + windowSize])
+            cbq[i * windowSize: i * windowSize + windowSize, j * windowSize: j * windowSize + windowSize])
 crZigzag = crZigzag.astype(np.int16)
 cbZigzag = cbZigzag.astype(np.int16)
 
@@ -149,7 +149,7 @@ for value in crEncoded:
     crBitsToTransmit += crHuffman[value]
 
 cbBitsToTransmit = str()
-for value in crEncoded:
+for value in cbEncoded:
     cbBitsToTransmit += cbHuffman[value]
 
 if file.writable():
