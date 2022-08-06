@@ -12,3 +12,6 @@ DC coefficients are encoded using DPCM as follows: \<size in bits\>, \<amplitude
 An intermediary stream consists of encoded DC and AC components, and an EOB (end of block) to mark the end of the block. To achieve a higher compression rate, all zero AC components are trimmed from the end of the zigzag scan.
   
 A Huffman dictionary is created by calculating the frequency of each intermediary symbol. Since one image is to be sent in this project, the frequencies of the intermediary symbols will be calculated from those of this image (one can use a predefined Huffman dictionary). Each intermediary stream is encoded using its assigned codeword. The encoded bitstream is then written to an output file.
+
+# Note
+If anyone codes the decoder, kindly let me know so that I can link your repository from here, thanks.
