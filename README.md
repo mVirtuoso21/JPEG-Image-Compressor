@@ -15,6 +15,7 @@ A Huffman dictionary is created by calculating the frequency of each intermediar
 
 # Note
 Kindly check the poll in the discussions tab.
+
 If anyone codes the decoder, kindly let me know so that I can link your repository from here.
 
 Thanks
