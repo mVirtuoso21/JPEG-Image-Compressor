@@ -95,31 +95,35 @@ yZigzag = np.zeros(((vBlocksForY * hBlocksForY), windowSize * windowSize))
 crZigzag = np.zeros(((vBlocksForC * hBlocksForC), windowSize * windowSize))
 cbZigzag = np.zeros(((vBlocksForC * hBlocksForC), windowSize * windowSize))
 
+yCounter = 0
 for i in range(vBlocksForY):
     for j in range(hBlocksForY):
         yDct[i * windowSize: i * windowSize + windowSize, j * windowSize: j * windowSize + windowSize] = cv2.dct(
             yPadded[i * windowSize: i * windowSize + windowSize, j * windowSize: j * windowSize + windowSize])
         yq[i * windowSize: i * windowSize + windowSize, j * windowSize: j * windowSize + windowSize] = np.ceil(
             yDct[i * windowSize: i * windowSize + windowSize, j * windowSize: j * windowSize + windowSize] / QTY)
-        yZigzag[i * j] += zigzag(
+        yZigzag[yCounter] += zigzag(
             yq[i * windowSize: i * windowSize + windowSize, j * windowSize: j * windowSize + windowSize])
+        yCounter += 1
 yZigzag = yZigzag.astype(np.int16)
 
 # either crq or cbq can be used to compute the number of blocks
+cCounter = 0
 for i in range(vBlocksForC):
     for j in range(hBlocksForC):
         crDct[i * windowSize: i * windowSize + windowSize, j * windowSize: j * windowSize + windowSize] = cv2.dct(
             crPadded[i * windowSize: i * windowSize + windowSize, j * windowSize: j * windowSize + windowSize])
         crq[i * windowSize: i * windowSize + windowSize, j * windowSize: j * windowSize + windowSize] = np.ceil(
             crDct[i * windowSize: i * windowSize + windowSize, j * windowSize: j * windowSize + windowSize] / QTC)
-        crZigzag[i * j] += zigzag(
+        crZigzag[cCounter] += zigzag(
             crq[i * windowSize: i * windowSize + windowSize, j * windowSize: j * windowSize + windowSize])
         cbDct[i * windowSize: i * windowSize + windowSize, j * windowSize: j * windowSize + windowSize] = cv2.dct(
             cbPadded[i * windowSize: i * windowSize + windowSize, j * windowSize: j * windowSize + windowSize])
         cbq[i * windowSize: i * windowSize + windowSize, j * windowSize: j * windowSize + windowSize] = np.ceil(
             cbDct[i * windowSize: i * windowSize + windowSize, j * windowSize: j * windowSize + windowSize] / QTC)
-        cbZigzag[i * j] += zigzag(
+        cbZigzag[cCounter] += zigzag(
             cbq[i * windowSize: i * windowSize + windowSize, j * windowSize: j * windowSize + windowSize])
+        cCounter += 1
 crZigzag = crZigzag.astype(np.int16)
 cbZigzag = cbZigzag.astype(np.int16)
 
