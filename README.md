@@ -14,8 +14,6 @@ An intermediary stream consists of encoded DC and AC components, and an EOB (end
 A Huffman dictionary is created by calculating the frequency of each intermediary symbol. Since one image is to be sent in this project, the frequencies of the intermediary symbols will be calculated from those of this image (one can use a predefined Huffman dictionary). Each intermediary stream is encoded using its assigned codeword. The encoded bitstream is then written to an output file.
 
 # Note
-Kindly check the poll in the discussions tab.
-
 If anyone codes the decoder, kindly let me know so that I can link your repository from here.
 
 Thanks
